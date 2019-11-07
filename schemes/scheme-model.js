@@ -7,7 +7,7 @@ module.exports = {
   add,
   // addStep,
   update,
-  // remove
+  remove
 };
 
 function find() {
@@ -33,8 +33,14 @@ async function add(scheme) {
   return findById(id);
 };
 
-function update(id, changes) {
+function update(changes, id) { // Order matters, here; check the order in routers
   return db('schemes')
     .where({ id })
-    .update(changes, '*');
+    .update(changes);
+};
+
+function remove(id) {
+  return db('schemes')
+    .where({ id })
+    .delete();
 };
